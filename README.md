@@ -35,5 +35,11 @@ There are also several interesting possibilies for extending GPS Tagger's functi
 
 ## Screen Mockups
 
-* 1: Home Screen
+1: Home Screen
 ![Home](/docs/Home.jpg)
+
+2: My Tags
+![My Tags](/docs/My Tags.jpg)
+
+2: View Tag
+![View Tag](/docs/View Tag.jpg)

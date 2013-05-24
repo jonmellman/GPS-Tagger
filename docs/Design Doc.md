@@ -30,7 +30,7 @@ view\_tag contains an EditText to allow the user to modify the current tag's lab
 
 1. **MainActivity:**
 
-onCreate() will create an array of GoogleMaps objects from the saved GPSTags. When a user taps the "Tag" button, the GPSTag database is updated with the new entry's latitude and longitude, and a corresponding GoogleMap will be created and added to the existing array of GoogleMaps objects
+onCreate() will create an array of GoogleMaps objects from the items in the GPSTags database. When a user taps the "Tag" button, the GPSTag database is updated with the new entry's latitude and longitude, and a corresponding GoogleMap will be created and added to the existing array of GoogleMaps objects
 
 The new GoogleMap will be passed to the ViewTagActivity so the user can view and edit their new tag.
 

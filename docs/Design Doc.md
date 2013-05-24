@@ -16,13 +16,13 @@ Users can save GPSTags, which only hold the latitude and longitude of their curr
 Simply layout consisting of a large "Tag" button.
 
 2. **activity\_my\_tags:**  
-![review](/My_Tags.jpg)
+![review](/My Tags.jpg)
 
 my\_tags layout is comprised of a listview which shows the label and created_at fields for each saved GPSTag. A map preview is also displayed.
 
 
 3. **activity\_view\_tag:**  
-![trends](//View_Tag.jpg) 
+![trends](//View Tag.jpg) 
 
 view\_tag contains an EditText to allow the user to modify the current tag's label. Also displayed are the created_at datetime, a larger map preview, and a delete button which deletes the tag and navigates the user back to my\_tags.
 

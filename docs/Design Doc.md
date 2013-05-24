@@ -22,7 +22,7 @@ my\_tags layout is comprised of a listview which shows the label and created_at 
 
 
 3. **activity\_view\_tag:**  
-![trends](/View_Tag.jpg) 
+![trends](//View_Tag.jpg) 
 
 view\_tag contains an EditText to allow the user to modify the current tag's label. Also displayed are the created_at datetime, a larger map preview, and a delete button which deletes the tag and navigates the user back to my\_tags.
 

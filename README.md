@@ -32,3 +32,14 @@ There are also several interesting possibilies for extending GPS Tagger's functi
 * Standard Android libraries will be used
 * GPS Tagger will be developed using Google's early access preview of the Android Studio IDE (v0.1)
 * GPS Tagger will be tested on a physical android device - a Galaxy S3 running Jellybean 4.1
+
+## Screen Mockups
+
+1: Home Screen
+![Home](/docs/Home.jpg)
+
+2: My Tags
+![My Tags](/docs/My Tags.jpg)
+
+2: View Tag
+![View Tag](/docs/View Tag.jpg)

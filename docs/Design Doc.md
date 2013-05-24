@@ -2,9 +2,10 @@
 
 ## Models
 
-1. GPSTag 
-> **Database Columns:**  
-> id | label | latitude | longitude | created\_at | updated\_at
+1. GPSTag  
+
+**Database Columns:**  
+id | label | latitude | longitude | created\_at | updated\_at
 
 Users can save GPSTags, which only hold the latitude and longitude of their current Location. A GoogleMap will then be generated at runtime from each of the user's GPSTags. This minimizes memory storeage requirements.
 

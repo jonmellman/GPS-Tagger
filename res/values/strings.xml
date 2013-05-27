@@ -10,5 +10,7 @@
     <string name="label">Label: </string>
     <string name="delete">Delete Tag</string>
     <string name="confirm">Confirm</string>
+    <string name="make_tag">Make Tag</string>
+    <string name="my_tags">My Tags</string>
 
 </resources>

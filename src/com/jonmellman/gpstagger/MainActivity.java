@@ -6,15 +6,22 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.annotation.TargetApi;
+import android.app.ActionBar.Tab;
 import android.app.Activity;
+import android.app.FragmentTransaction;
+import android.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.app.ActionBar;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
     private final String LOGTAG = "MainActivity";
     private static DatabaseHandler dbHandler;
 
@@ -29,17 +36,24 @@ public class MainActivity extends Activity {
         return currentLocation;
     }
 
-    @Override
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i(LOGTAG, "onCreate() called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        //set up actionbar to show tabs
+        final ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        
+        //add tabs
+        actionBar.addTab(actionBar.newTab().setText(R.string.make_tag)
+                .setTabListener(this));
+        actionBar.addTab(actionBar.newTab().setText(R.string.my_tags)
+                .setTabListener(this));
 
         //initialize database handler
         dbHandler = DatabaseHandler.getInstance(this);
-
-        //initialize components
-        tagButton = (Button) findViewById(R.id.tag_button);
 
         //begin receiving location data for when user creates a tag
         registerForLocationData();
@@ -175,4 +189,38 @@ public class MainActivity extends Activity {
 
         }
     }
+
+
+
+	@Override
+	public void onTabReselected(Tab tab, FragmentTransaction ft) {
+		Log.i(LOGTAG, "Tab reselected: " + tab.getPosition());
+		
+	}
+
+	@Override
+	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+		Log.i(LOGTAG, "Tab selected: " + tab.getPosition());
+		
+		Fragment fragment = new Fragment();
+		switch (tab.getPosition()) {
+		case MakeTagFragment.FRAGMENT_ID:
+			Log.i(LOGTAG, "Make Tag tab selected");
+			fragment = new MakeTagFragment();
+			break;
+		case MyTagsFragment.FRAGMENT_ID:
+			Log.i(LOGTAG, "My Tags tab selected");
+			fragment = new MyTagsFragment();
+			break;
+		}
+		
+		getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+		
+	}
+
+	@Override
+	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+		Log.i(LOGTAG, "Tab unselected: " + tab.getPosition());
+		
+	}
 }

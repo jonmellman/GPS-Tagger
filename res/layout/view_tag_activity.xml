@@ -28,9 +28,16 @@
               android:id="@+id/map"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:name="com.google.android.gms.maps.MapFragment" />
+              android:layout_marginLeft="50dip"
+              android:layout_marginRight="50dip"
+              android:layout_marginBottom="100dip"
+              android:layout_marginTop="100dip"
+              android:layout_gravity="center"
+              android:name="com.google.android.gms.maps.MapFragment"
+               />
 	
 	    <LinearLayout
+	        android:id="@+id/button_group"
 	        android:orientation="horizontal"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"

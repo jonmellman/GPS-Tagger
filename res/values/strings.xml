@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name" >GPS Tagger
+    </string>
+    <string name="action_settings" >Settings
+    </string>
+    <string name="tag">Touch to tag!
+    </string>
+    <string name="label">Label: </string>
+    <string name="delete">Delete Tag</string>
+    <string name="confirm">Confirm</string>
+
+</resources>

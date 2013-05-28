@@ -17,18 +17,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static DatabaseHandler dbHandlerInstance = null;
 
-    private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "gpsTagsManager";
-    private static final String TABLE_GPSTAGS = "gpsTags";
-
-    public static final String KEY_ID = "id";
+    private static final int DATABASE_VERSION = 2;
+    
+    public static final String DATABASE_NAME = "gpsTagsManager";
+    public static final String TABLE_GPSTAGS = "gpsTags";
+    public static final String KEY_ID = "_id";
     public static final String KEY_LABEL = "label";
     public static final String KEY_LATITUDE = "latitude";
     public static final String KEY_LONGITUDE = "longitude";
 
 
-    public DatabaseHandler(Context context) {
+    public DatabaseHandler(Context context) {    	
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+    
+    public String getTableName() {
+    	return TABLE_GPSTAGS;
     }
 
     //used to ensure only one instance of the database handler exists at a time
@@ -102,6 +106,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
+    	Log.i(LOGTAG, "Database upgrade called");
+    	sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_GPSTAGS);
+        onCreate(sqLiteDatabase);
 
     }
 }

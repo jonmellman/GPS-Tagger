@@ -38,7 +38,7 @@ public class ViewTagActivity extends Activity {
 
         //load the GpsTag
         Log.i(LOGTAG, "Loading record with ID: " + tagID);
-        DatabaseHandler dbHandler = MainActivity.getDbHandler();
+        DatabaseHandler dbHandler = DatabaseHandler.getInstance(this);
         GpsTag gpsTag = dbHandler.getGpsTag(tagID);
         Log.i(LOGTAG, "Loaded GpsTag " + gpsTag.toString());
 
@@ -72,7 +72,7 @@ public class ViewTagActivity extends Activity {
     }
     
     public void onConfirm(View view) {
-    	DatabaseHandler dbHandler = MainActivity.getDbHandler();
+    	DatabaseHandler dbHandler = DatabaseHandler.getInstance(this);
     	dbHandler.updateGpsTagLabel(tagID, labelText.getText().toString());
     	Toast toast =  Toast.makeText(this, "Tag updated!", Toast.LENGTH_SHORT);
     	toast.show();

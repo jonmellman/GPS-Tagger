@@ -32,8 +32,13 @@ public class MyTagsFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
+    }
+    
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+    	super.onActivityCreated(savedInstanceState);
     	
-    	DatabaseHandler dbHandler = MainActivity.getDbHandler();
+    	DatabaseHandler dbHandler = DatabaseHandler.getInstance(getActivity());
         SQLiteDatabase db = dbHandler.getReadableDatabase();
         
         Cursor cursor = db.rawQuery("SELECT * FROM " +  dbHandler.getTableName(), null);
@@ -42,12 +47,6 @@ public class MyTagsFragment extends ListFragment {
         int[] toControlIDs = new int[] {android.R.id.text1, android.R.id.text2}; //text field in android's default simple_list_item_1
         ListAdapter adapter = new SimpleCursorAdapter(this.getActivity(), android.R.layout.simple_list_item_2, cursor, fromColumns, toControlIDs, 0);
         setListAdapter(adapter);
-    	
-    }
-    
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-    	super.onStart();
     	
     	//it's safe to search for view objects by ID in onActivityCreated()
     	listView = (ListView) getView().findViewById(android.R.id.list);
@@ -77,8 +76,8 @@ public class MyTagsFragment extends ListFragment {
     	AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
     	switch (item.getItemId()) {
     	case 0: 
-    		MainActivity.getDbHandler().deleteGpsTag((int) info.id);
-    		onCreate(null);
+    		DatabaseHandler.getInstance(getActivity()).deleteGpsTag((int) info.id);
+    		onActivityCreated(null);
     		break;
     	}
     	return super.onContextItemSelected(item);

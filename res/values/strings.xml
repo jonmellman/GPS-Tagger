@@ -12,5 +12,6 @@
     <string name="confirm">Confirm</string>
     <string name="make_tag">Make Tag</string>
     <string name="my_tags">My Tags</string>
+    <string name="waiting_for_data">Obtaining location...</string>
 
 </resources>

@@ -8,7 +8,7 @@ public class GpsTag {
 
     int _id;
     double _latitude, _longitude;
-    String _label;
+    String _label, _created_at;
 
     public GpsTag() {
         _id = -1;
@@ -17,11 +17,12 @@ public class GpsTag {
         _label = DEFAULT_LABEL;
     }
 
-    public GpsTag(int id, String label, double latitude, double longitude) {
+    public GpsTag(int id, String label, double latitude, double longitude, String created_at) {
         _id = id;
         _latitude = latitude;
         _longitude = longitude;
         _label = label;
+        _created_at = created_at;
     }
 
     public double get_latitude() {
@@ -55,11 +56,19 @@ public class GpsTag {
     public void set_id(int _id) {
         this._id = _id;
     }
+    
+    public String get_created_at() {
+        return _created_at;
+    }
+
+    public void set_created_at(String _created_at) {
+        this._created_at = _created_at;
+    }
 
 
     @Override
     public String toString() {
-        return get_id() + " | " + get_label() + " | " + get_latitude() + " | " + get_longitude();
+        return get_id() + " | " + get_label() + " | " + get_latitude() + " | " + get_longitude() + " | " + get_created_at();
     }
 
 }

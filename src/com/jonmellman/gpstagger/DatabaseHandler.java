@@ -1,5 +1,8 @@
 package com.jonmellman.gpstagger;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
@@ -17,7 +20,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static DatabaseHandler dbHandlerInstance = null;
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     
     public static final String DATABASE_NAME = "gpsTagsManager";
     public static final String TABLE_GPSTAGS = "gpsTags";
@@ -25,6 +28,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String KEY_LABEL = "label";
     public static final String KEY_LATITUDE = "latitude";
     public static final String KEY_LONGITUDE = "longitude";
+    public static final String KEY_CREATED_AT = "created_at";
 
 
     public DatabaseHandler(Context context) {    	
@@ -48,7 +52,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String CREATE_GPSTAGS_TABLE = "CREATE TABLE " + TABLE_GPSTAGS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_LABEL + " TEXT,"
-                + KEY_LATITUDE + " REAL," + KEY_LONGITUDE + " REAL" + ")";
+                + KEY_LATITUDE + " REAL," + KEY_LONGITUDE + " REAL," 
+                + KEY_CREATED_AT + " TEXT" + ")";
         sqLiteDatabase.execSQL(CREATE_GPSTAGS_TABLE);
 
         Log.i(LOGTAG, "Initialized database: " + sqLiteDatabase.toString());
@@ -64,6 +69,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_LABEL, gpsTag.get_label());
         values.put(KEY_LATITUDE, gpsTag.get_latitude());
         values.put(KEY_LONGITUDE, gpsTag.get_longitude());
+        
+        //add created_at as String (can be easily parsed back to date later if needed)
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+        Date date = new Date();
+        values.put(KEY_CREATED_AT, dateFormat.format(date));
 
         long tagID = db.insert(TABLE_GPSTAGS, null, values);
         db.close();
@@ -77,7 +87,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         //SELECT * FROM TABLE_GPSTAGS WHERE KEY_ID = id
-        Cursor cursor = db.query(TABLE_GPSTAGS, new String[] {KEY_ID, KEY_LABEL, KEY_LATITUDE, KEY_LONGITUDE},
+        Cursor cursor = db.query(TABLE_GPSTAGS, new String[] {KEY_ID, KEY_LABEL, KEY_LATITUDE, KEY_LONGITUDE, KEY_CREATED_AT},
                 KEY_ID + "= ?", new String[] {String.valueOf(id) }, null, null, null, null);
 
         if (cursor != null) {
@@ -85,7 +95,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
 
         //new GpsTag(ID, Label, Latitude, Longitude)
-        GpsTag gpsTag = new GpsTag(cursor.getInt(0), cursor.getString(1), cursor.getDouble(2), cursor.getDouble(3));
+        GpsTag gpsTag = new GpsTag(cursor.getInt(0), cursor.getString(1), cursor.getDouble(2), cursor.getDouble(3), cursor.getString(4));
 
         Log.i(LOGTAG, "Fetched record " + gpsTag.toString());
         cursor.close();

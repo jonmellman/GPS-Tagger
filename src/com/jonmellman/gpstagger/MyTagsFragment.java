@@ -38,7 +38,7 @@ public class MyTagsFragment extends ListFragment {
         
         Cursor cursor = db.rawQuery("SELECT * FROM " +  dbHandler.getTableName(), null);
         this.getActivity().startManagingCursor(cursor);
-        String[] fromColumns = new String[] {dbHandler.KEY_ID, dbHandler.KEY_LABEL};
+        String[] fromColumns = new String[] {dbHandler.KEY_LABEL, dbHandler.KEY_CREATED_AT};
         int[] toControlIDs = new int[] {android.R.id.text1, android.R.id.text2}; //text field in android's default simple_list_item_1
         ListAdapter adapter = new SimpleCursorAdapter(this.getActivity(), android.R.layout.simple_list_item_2, cursor, fromColumns, toControlIDs, 0);
         setListAdapter(adapter);

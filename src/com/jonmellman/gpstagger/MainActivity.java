@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.app.ActionBar;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
@@ -30,7 +31,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
     Button tagButton;
 
-    Location currentLocation;
+    Location currentLocation = null;
 
     public Location getCurrentLocation() {
         return currentLocation;
@@ -51,40 +52,48 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 .setTabListener(this));
         actionBar.addTab(actionBar.newTab().setText(R.string.my_tags)
                 .setTabListener(this));
-
+        
         //initialize database handler
         dbHandler = DatabaseHandler.getInstance(this);
 
         //begin receiving location data for when user creates a tag
         registerForLocationData();
     }
+    
+    @Override
+    public void onStart() {
+    	super.onStart();
+    	tagButton = (Button) findViewById(R.id.tag_button);
+    	tagButton.setEnabled(false);
+    	tagButton.setText(R.string.waiting_for_data);
+    	
+    }
 
     private void registerForLocationData() {
 
-        //initialize criteria for provider data
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_MEDIUM);
-        criteria.setPowerRequirement(Criteria.POWER_MEDIUM);
-        criteria.setAltitudeRequired(false);
-        criteria.setBearingRequired(false);
-
+//        //initialize criteria for provider data
+//        Criteria criteria = new Criteria();
+//        criteria.setAccuracy(Criteria.ACCURACY_MEDIUM);
+//        criteria.setPowerRequirement(Criteria.POWER_MEDIUM);
+//        criteria.setAltitudeRequired(false);
+//        criteria.setBearingRequired(false);
+//
         //initialize a LocationManager
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-
-        //determine which provider to use for initial location grab
+//
+//        //determine which provider to use for initial location grab
 //        String provider = locationManager.getBestProvider(criteria, true);
-        String provider = locationManager.GPS_PROVIDER;
-
-        if (provider == null) {
-            Log.i(LOGTAG, "Provider is null.");
-        } else {
-            Log.i(LOGTAG, "Got provider: " + provider);
-        }
-
-        //get last known location
-        Location location = locationManager.getLastKnownLocation(provider);
-        Log.i(LOGTAG, "Getting last known location..");
-        setCurrentLocation(location);
+//
+//        if (provider == null) {
+//            Log.i(LOGTAG, "Provider is null.");
+//        } else {
+//            Log.i(LOGTAG, "Got provider: " + provider);
+//        }
+//
+//        //get last known location
+//        Location location = locationManager.getLastKnownLocation(provider);
+//        Log.i(LOGTAG, "Getting last known location..");
+//        setCurrentLocation(location);
 
         LocationListener locationListener = new MyLocationListener();
 
@@ -132,6 +141,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     /* Called when user taps the "Tag" button
      */
     public void createTag(View view) {
+    	
         Log.i(LOGTAG, "Attempting to create GpsTag..");
         if (currentLocation != null) {
             //make tag with currentLocation
@@ -145,8 +155,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             //launch view tag activity
             Intent intent = new Intent(this, ViewTagActivity.class);
             intent.putExtra(DatabaseHandler.KEY_ID, tagID);
+        	Toast.makeText(this, "Tag created!", Toast.LENGTH_LONG).show();
             startActivity(intent);
         } else {
+        	Toast.makeText(this, "Could not determine location", Toast.LENGTH_LONG).show();
             Log.i(LOGTAG, "Location is null, cannot create tag");
         }
     }
@@ -161,6 +173,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             Log.i(LOGTAG, "Last location update is null");
         }
 
+        if (tagButton != null && !tagButton.isEnabled()) { //first location data receieved!
+	    	tagButton.setEnabled(true);
+	    	tagButton.setText(R.string.tag);  
+        }
         currentLocation = location;
     }
 
@@ -199,7 +215,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		
+		Log.i(LOGTAG, "Tab selected");
 		Fragment fragment = new Fragment();
 		switch (tab.getPosition()) {
 		case MakeTagFragment.FRAGMENT_ID:

@@ -49,7 +49,6 @@ public class ViewTagActivity extends Activity {
         LatLng latLng = new LatLng(gpsTag.get_latitude(), gpsTag.get_longitude());
         
         setUpMapIfNeeded(latLng);
-        
 
     }
     
@@ -73,10 +72,10 @@ public class ViewTagActivity extends Activity {
     }
     
     public void onConfirm(View view) {
-//    	DatabaseHandler dbHandler = MainActivity.getDbHandler();
-//    	dbHandler.updateGpsTagLabel(tagID, labelText.getText().toString());
-//    	Toast toast =  Toast.makeText(this, "Tag updated!", Toast.LENGTH_SHORT);
-//    	toast.show();
+    	DatabaseHandler dbHandler = MainActivity.getDbHandler();
+    	dbHandler.updateGpsTagLabel(tagID, labelText.getText().toString());
+    	Toast toast =  Toast.makeText(this, "Tag updated!", Toast.LENGTH_SHORT);
+    	toast.show();
     	
     }
 }

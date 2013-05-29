@@ -170,7 +170,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
         @Override
         public void onLocationChanged(Location location) {
-            Log.i(LOGTAG, "Updating location..");
+            Log.i(LOGTAG, location.getProvider() + ": updating location..");
             setCurrentLocation(location);
         }
 
@@ -194,33 +194,29 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		Log.i(LOGTAG, "Tab reselected: " + tab.getPosition());
-		
+
 	}
 
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		Log.i(LOGTAG, "Tab selected: " + tab.getPosition());
 		
 		Fragment fragment = new Fragment();
 		switch (tab.getPosition()) {
 		case MakeTagFragment.FRAGMENT_ID:
-			Log.i(LOGTAG, "Make Tag tab selected");
 			fragment = new MakeTagFragment();
 			break;
 		case MyTagsFragment.FRAGMENT_ID:
-			Log.i(LOGTAG, "My Tags tab selected");
 			fragment = new MyTagsFragment();
 			break;
 		}
 		
+		//replace FrameLayout container in the layout with the correct fragment
 		getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 		
 	}
 
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		Log.i(LOGTAG, "Tab unselected: " + tab.getPosition());
 		
 	}
 }

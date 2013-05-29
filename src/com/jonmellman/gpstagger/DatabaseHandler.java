@@ -88,20 +88,44 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         GpsTag gpsTag = new GpsTag(cursor.getInt(0), cursor.getString(1), cursor.getDouble(2), cursor.getDouble(3));
 
         Log.i(LOGTAG, "Fetched record " + gpsTag.toString());
+        cursor.close();
         db.close();
 
         return gpsTag;
     }
-
-    public int updateGpsTag(GpsTag gpsTag) {
+    
+    public void updateGpsTagLabel(int id, String newLabel) {
+        Log.i(LOGTAG, "Updating tag: " + this.getGpsTag(id).toString());
         SQLiteDatabase db = this.getWritableDatabase();
 
+        GpsTag oldTag = this.getGpsTag(id);
+        
         ContentValues values = new ContentValues();
-        values.put(KEY_LABEL, gpsTag.get_label());
-        values.put(KEY_LATITUDE, gpsTag.get_latitude());
-        values.put(KEY_LONGITUDE, gpsTag.get_longitude());
+        values.put(KEY_LABEL, newLabel);
+        values.put(KEY_LATITUDE, oldTag.get_latitude());
+        values.put(KEY_LONGITUDE, oldTag.get_longitude());
+        
+        db.update(TABLE_GPSTAGS, values, KEY_ID + "= ?", new String[] {String.valueOf(id)});
+        db.close();
+        Log.i(LOGTAG, "Updated tag to: " + this.getGpsTag(id).toString());
+    }
 
-        return db.update(TABLE_GPSTAGS, values, KEY_ID + "= ?", new String[] {String.valueOf(gpsTag.get_id())});
+//    public void updateGpsTag(GpsTag gpsTag) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//
+//        ContentValues values = new ContentValues();
+//        values.put(KEY_LABEL, gpsTag.get_label());
+//        values.put(KEY_LATITUDE, gpsTag.get_latitude());
+//        values.put(KEY_LONGITUDE, gpsTag.get_longitude());
+//
+//        db.update(TABLE_GPSTAGS, values, KEY_ID + "= ?", new String[] {String.valueOf(gpsTag.get_id())});
+//        db.close();
+//    }
+    
+    public void deleteGpsTag(int id) {
+    	SQLiteDatabase db = this.getWritableDatabase();
+    	db.delete(TABLE_GPSTAGS, KEY_ID + " = ?", new String[] { String.valueOf(id) });
+    	db.close();
     }
 
     @Override

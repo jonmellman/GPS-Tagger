@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -23,6 +25,7 @@ public class ViewTagActivity extends Activity {
 
     private EditText labelText;
     private GoogleMap map;
+    private int tagID;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB) //necessary for MapFragment
     public void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,7 @@ public class ViewTagActivity extends Activity {
 
         //grab the ID of the GpsTag to load
         Intent intent = getIntent();
-        int tagID = intent.getIntExtra(DatabaseHandler.KEY_ID, -1);
+        tagID = intent.getIntExtra(DatabaseHandler.KEY_ID, -1);
 
         //load the GpsTag
         Log.i(LOGTAG, "Loading record with ID: " + tagID);
@@ -67,5 +70,13 @@ public class ViewTagActivity extends Activity {
 
             }
         }
+    }
+    
+    public void onConfirm(View view) {
+//    	DatabaseHandler dbHandler = MainActivity.getDbHandler();
+//    	dbHandler.updateGpsTagLabel(tagID, labelText.getText().toString());
+//    	Toast toast =  Toast.makeText(this, "Tag updated!", Toast.LENGTH_SHORT);
+//    	toast.show();
+    	
     }
 }

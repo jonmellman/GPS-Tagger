@@ -64,8 +64,7 @@ int id tag_button 0x7f050007
 int id terrain 0x7f050003
 int layout activity_main 0x7f030000
 int layout make_tag_fragment 0x7f030001
-int layout my_tags_fragment 0x7f030002
-int layout view_tag_activity 0x7f030003
+int layout view_tag_activity 0x7f030002
 int menu activity_main 0x7f090000
 int string action_settings 0x7f060016
 int string app_name 0x7f060015
@@ -88,14 +87,17 @@ int string common_google_play_services_update_title 0x7f060007
 int string common_signin_button_text 0x7f06000d
 int string common_signin_button_text_long 0x7f06000e
 int string confirm 0x7f06001a
+int string created_tag 0x7f06001f
 int string delete 0x7f060019
 int string label 0x7f060018
 int string location_client_ulr_inactive_age_under_13 0x7f060012
 int string location_client_ulr_inactive_age_unknown 0x7f060013
 int string location_client_ulr_inactive_unknown_restriction 0x7f060014
+int string location_indeterminate 0x7f060020
 int string make_tag 0x7f06001b
 int string my_tags 0x7f06001c
 int string tag 0x7f060017
+int string updated_tag 0x7f06001e
 int string waiting_for_data 0x7f06001d
 int style AppBaseTheme 0x7f080000
 int style AppTheme 0x7f080001

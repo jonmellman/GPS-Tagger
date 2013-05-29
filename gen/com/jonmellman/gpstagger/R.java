@@ -193,8 +193,7 @@ containing a value of this type.
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int make_tag_fragment=0x7f030001;
-        public static final int my_tags_fragment=0x7f030002;
-        public static final int view_tag_activity=0x7f030003;
+        public static final int view_tag_activity=0x7f030002;
     }
     public static final class menu {
         public static final int activity_main=0x7f090000;
@@ -267,6 +266,7 @@ containing a value of this type.
          */
         public static final int common_signin_button_text_long=0x7f06000e;
         public static final int confirm=0x7f06001a;
+        public static final int created_tag=0x7f06001f;
         public static final int delete=0x7f060019;
         public static final int label=0x7f060018;
         /**  Location client code resources (prefix with location_client) 
@@ -280,9 +280,11 @@ containing a value of this type.
         public static final int location_client_ulr_inactive_age_under_13=0x7f060012;
         public static final int location_client_ulr_inactive_age_unknown=0x7f060013;
         public static final int location_client_ulr_inactive_unknown_restriction=0x7f060014;
+        public static final int location_indeterminate=0x7f060020;
         public static final int make_tag=0x7f06001b;
         public static final int my_tags=0x7f06001c;
         public static final int tag=0x7f060017;
+        public static final int updated_tag=0x7f06001e;
         public static final int waiting_for_data=0x7f06001d;
     }
     public static final class style {

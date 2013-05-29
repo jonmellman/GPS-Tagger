@@ -1,4 +1,4 @@
-package com.jonmellman.gpstagger;
+package com.jonmellman.gpstagger.activities;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -16,10 +16,16 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.jonmellman.gpstagger.DatabaseHandler;
+import com.jonmellman.gpstagger.GpsTag;
+import com.jonmellman.gpstagger.R;
+import com.jonmellman.gpstagger.R.id;
+import com.jonmellman.gpstagger.R.layout;
 
 /**
- * Created by jonmellman on 5/26/13.
+ * Activity for viewing a single tag from database ID passed in the intent.
  */
+
 public class ViewTagActivity extends Activity {
 	private static final String LOGTAG = "ViewTagActivity";
 
@@ -41,15 +47,15 @@ public class ViewTagActivity extends Activity {
         GpsTag gpsTag = dbHandler.getGpsTag(tagID);
         Log.i(LOGTAG, "Loaded GpsTag " + gpsTag.toString());
         
-
+        //initialize the label with the correct text
         labelText = (EditText) findViewById(R.id.labelText);
         labelText.setText(gpsTag.get_label());
 
         //store latitude and longitude in LatLng object to be passed to the map's camera
         LatLng latLng = new LatLng(gpsTag.get_latitude(), gpsTag.get_longitude());
         
+        //initialize the map
         setUpMapIfNeeded(latLng);
-
     }
     
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -62,7 +68,7 @@ public class ViewTagActivity extends Activity {
                                 .getMap();
             // Check if we were successful in obtaining the map.
             if (map != null) {
-                // The Map is verified. It is now safe to manipulate the map.
+                // The Map is verified. Update camera position and zoom, and add a marker.
             	map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
             	map.addMarker(new MarkerOptions()
             			.position(latLng));
@@ -70,10 +76,13 @@ public class ViewTagActivity extends Activity {
         }
     }
     
+    /*
+     * On confirm button clicked to save tag label.
+     */
     public void onConfirm(View view) {
     	DatabaseHandler dbHandler = DatabaseHandler.getInstance(this);
     	dbHandler.updateGpsTagLabel(tagID, labelText.getText().toString());
-    	Toast toast =  Toast.makeText(this, "Tag updated!", Toast.LENGTH_SHORT);
+    	Toast toast =  Toast.makeText(this, "@string/update_tag", Toast.LENGTH_SHORT);
     	toast.show();
     }
 }

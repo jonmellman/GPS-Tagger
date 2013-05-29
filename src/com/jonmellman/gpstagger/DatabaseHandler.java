@@ -99,7 +99,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Log.i(LOGTAG, "Fetched record " + gpsTag.toString());
         cursor.close();
-        db.close();
+//        db.close(); //not sure why this has to remain open..
 
         return gpsTag;
     }
@@ -107,7 +107,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void updateGpsTagLabel(int id, String newLabel) {
         Log.i(LOGTAG, "Updating tag: " + this.getGpsTag(id).toString());
         SQLiteDatabase db = this.getWritableDatabase();
-
+        
+        boolean isOpen = db.isOpen();
         GpsTag oldTag = this.getGpsTag(id);
         
         ContentValues values = new ContentValues();
@@ -119,18 +120,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
         Log.i(LOGTAG, "Updated tag to: " + this.getGpsTag(id).toString());
     }
-
-//    public void updateGpsTag(GpsTag gpsTag) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//
-//        ContentValues values = new ContentValues();
-//        values.put(KEY_LABEL, gpsTag.get_label());
-//        values.put(KEY_LATITUDE, gpsTag.get_latitude());
-//        values.put(KEY_LONGITUDE, gpsTag.get_longitude());
-//
-//        db.update(TABLE_GPSTAGS, values, KEY_ID + "= ?", new String[] {String.valueOf(gpsTag.get_id())});
-//        db.close();
-//    }
     
     public void deleteGpsTag(int id) {
     	SQLiteDatabase db = this.getWritableDatabase();

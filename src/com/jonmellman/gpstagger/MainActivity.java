@@ -31,13 +31,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         actionBar.addTab(actionBar.newTab().setText(R.string.my_tags)
                 .setTabListener(this));
     }
-    
-    /* Called when user taps the "Tag" button
-     */
-    public void onClick(View view) {
-    	MakeTagFragment mtFragment = (MakeTagFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAG);
-    	mtFragment.createTag(view);
-    }
 
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {}
@@ -61,4 +54,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {}
+	
+    /* Called when user taps the "Tag" button
+     */
+    public void onClick(View view) {
+    	MakeTagFragment mtFragment = (MakeTagFragment) getFragmentManager().findFragmentByTag(FRAGMENT_TAG);
+    	mtFragment.createTag(view);
+    }
 }

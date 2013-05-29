@@ -1,11 +1,7 @@
 package com.jonmellman.gpstagger;
 
 
-import android.support.v4.app.FragmentActivity;
-import android.app.ActionBar;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.app.ActionBar.Tab;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -24,8 +20,6 @@ public class MakeTagFragment extends Fragment {
 	private static final String LOGTAG = "MakeTagFragment";
 	
 	Button tagButton; //set enabled in onResume of mainactivity?
-	
-    private static DatabaseHandler dbHandler;
 
     LocationManager locationManager;
     MyLocationListener locationListener;
@@ -42,8 +36,8 @@ public class MakeTagFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-        //initialize database handler and button
-        dbHandler = DatabaseHandler.getInstance(getActivity());
+        
+		//initialize button as disabled
         tagButton = (Button) getView().findViewById(R.id.tag_button);
         tagButton.setEnabled(false);
         tagButton.setText(R.string.waiting_for_data);
@@ -76,7 +70,6 @@ public class MakeTagFragment extends Fragment {
         	locationManager.removeUpdates(locationListener);
         }
     }
-
     
     public void updateLocation(Location location) {
         double lat, lon;
@@ -99,14 +92,6 @@ public class MakeTagFragment extends Fragment {
         return currentLocation;
     }
     
-    public void gotLocation() {
-    	if (tagButton != null) {
-    		tagButton.setEnabled(true);
-    	} else {
-    		Log.i(LOGTAG, "Tried to enable null tag button.");
-    	}
-    }
-    
     public void createTag(View view) {    	
         Log.i(LOGTAG, "Attempting to create GpsTag..");
         if (currentLocation != null) {
@@ -114,7 +99,7 @@ public class MakeTagFragment extends Fragment {
             GpsTag newTag = new GpsTag();
             newTag.set_latitude(getCurrentLocation().getLatitude());
             newTag.set_longitude(getCurrentLocation().getLongitude());
-            int tagID = dbHandler.addGpsTag(newTag); //get primary key of newly added tag
+            int tagID = DatabaseHandler.getInstance(getActivity()).addGpsTag(newTag); //get primary key of newly added tag
 
             Log.i(LOGTAG, "Created tag with id " + tagID + ". Launching ViewTagActivity..");
 

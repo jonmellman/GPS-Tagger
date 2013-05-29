@@ -33,14 +33,14 @@ public class ViewTagActivity extends Activity {
         setContentView(R.layout.view_tag_activity);
 
         //grab the ID of the GpsTag to load
-        Intent intent = getIntent();
-        tagID = intent.getIntExtra(DatabaseHandler.KEY_ID, -1);
+        tagID = getIntent().getIntExtra(DatabaseHandler.KEY_ID, -1);
 
         //load the GpsTag
         Log.i(LOGTAG, "Loading record with ID: " + tagID);
         DatabaseHandler dbHandler = DatabaseHandler.getInstance(this);
         GpsTag gpsTag = dbHandler.getGpsTag(tagID);
         Log.i(LOGTAG, "Loaded GpsTag " + gpsTag.toString());
+        
 
         labelText = (EditText) findViewById(R.id.labelText);
         labelText.setText(gpsTag.get_label());
@@ -66,7 +66,6 @@ public class ViewTagActivity extends Activity {
             	map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
             	map.addMarker(new MarkerOptions()
             			.position(latLng));
-
             }
         }
     }
@@ -76,6 +75,5 @@ public class ViewTagActivity extends Activity {
     	dbHandler.updateGpsTagLabel(tagID, labelText.getText().toString());
     	Toast toast =  Toast.makeText(this, "Tag updated!", Toast.LENGTH_SHORT);
     	toast.show();
-    	
     }
 }

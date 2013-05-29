@@ -51,8 +51,7 @@ int drawable common_signin_btn_text_normal_light 0x7f020015
 int drawable common_signin_btn_text_pressed_dark 0x7f020016
 int drawable common_signin_btn_text_pressed_light 0x7f020017
 int drawable ic_launcher 0x7f020018
-int id action_settings 0x7f05000b
-int id button_group 0x7f05000a
+int id action_settings 0x7f05000a
 int id container 0x7f050005
 int id hybrid 0x7f050004
 int id labelText 0x7f050008

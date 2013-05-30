@@ -267,6 +267,7 @@ containing a value of this type.
         public static final int common_signin_button_text_long=0x7f06000e;
         public static final int confirm=0x7f06001a;
         public static final int created_tag=0x7f06001f;
+        public static final int default_label=0x7f060021;
         public static final int delete=0x7f060019;
         public static final int label=0x7f060018;
         /**  Location client code resources (prefix with location_client) 

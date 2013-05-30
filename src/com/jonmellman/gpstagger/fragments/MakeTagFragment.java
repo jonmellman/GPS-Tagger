@@ -114,7 +114,7 @@ public class MakeTagFragment extends Fragment {
         Log.i(LOGTAG, "Attempting to create GpsTag..");
         if (currentLocation != null) {
             //make tag with currentLocation
-            GpsTag newTag = new GpsTag();
+            GpsTag newTag = new GpsTag(getActivity());
             newTag.set_latitude(getCurrentLocation().getLatitude());
             newTag.set_longitude(getCurrentLocation().getLongitude());
             

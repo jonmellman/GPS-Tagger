@@ -1,9 +1,3 @@
-/**
- *  MainActivity.java holds the core layout for GPS Tagger.
- * It holds the tab navigator and loads the MakeTagFragment and MyTagsFragment.
- */
-
-
 package com.jonmellman.gpstagger.activities;
 
 import android.annotation.TargetApi;
@@ -20,6 +14,11 @@ import android.view.View;
 import com.jonmellman.gpstagger.R;
 import com.jonmellman.gpstagger.fragments.MakeTagFragment;
 import com.jonmellman.gpstagger.fragments.MyTagsFragment;
+
+/**
+ *  MainActivity.java holds the core layout for GPS Tagger.
+ * It holds the tab navigator and loads the MakeTagFragment and MyTagsFragment.
+ */
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
     private final String LOGTAG = "MainActivity";

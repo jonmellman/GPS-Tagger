@@ -16,5 +16,6 @@
 	<string name="updated_tag">Label updated!</string>
 	<string name="created_tag">Tag created!</string>
 	<string name="location_indeterminate">Could not determine location</string>
+	<string name="default_label">Untitled Tag</string>
 
 </resources>

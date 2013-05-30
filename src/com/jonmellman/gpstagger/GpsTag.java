@@ -1,68 +1,70 @@
 package com.jonmellman.gpstagger;
 
+import android.content.Context;
+
 /**
- * Created by jonmellman on 5/26/13.
+ * GpsTag objects store a latitute, longitude, label, and created_at field.
+ * They can then be added to the database and given a primary key id.
  */
 public class GpsTag {
-    public static final String DEFAULT_LABEL = "Recent Tag";
 
-    int _id;
-    double _latitude, _longitude;
-    String _label, _created_at;
+    int id;
+    double latitude, longitude;
+    String label, created_at;
 
-    public GpsTag() {
-        _id = -1;
-        _latitude = -1.0;
-        _longitude = -1.0;
-        _label = DEFAULT_LABEL;
+    public GpsTag(Context context) {
+        this.id = -1;
+        this.latitude = -1.0;
+        this.longitude = -1.0;
+        this.label = context.getString(R.string.default_label);
     }
 
     public GpsTag(int id, String label, double latitude, double longitude, String created_at) {
-        _id = id;
-        _latitude = latitude;
-        _longitude = longitude;
-        _label = label;
-        _created_at = created_at;
+    	this.id = id;
+    	this.latitude = latitude;
+    	this.longitude = longitude;
+    	this.label = label;
+    	this.created_at = created_at;
     }
 
     public double get_latitude() {
-        return _latitude;
+        return this.latitude;
     }
 
-    public void set_latitude(double _latitude) {
-        this._latitude = _latitude;
+    public void set_latitude(double latitude) {
+    	this.latitude = latitude;
     }
 
     public double get_longitude() {
-        return _longitude;
+        return this.longitude;
     }
 
-    public void set_longitude(double _longitude) {
-        this._longitude = _longitude;
+    public void set_longitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public String get_label() {
-        return _label;
+        return this.label;
     }
 
-    public void set_label(String _label) {
-        this._label = _label;
+    public void set_label(String label) {
+        this.label = label;
     }
 
     public int get_id() {
-        return _id;
+        return id;
     }
 
-    public void set_id(int _id) {
-        this._id = _id;
+    public void set_id(int id) {
+        this.id = id;
     }
     
     public String get_created_at() {
-        return _created_at;
+        return created_at;
     }
 
-    public void set_created_at(String _created_at) {
-        this._created_at = _created_at;
+    public void set_created_at(String created_at) {
+        this.created_at = created_at;
     }
 
 

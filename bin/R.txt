@@ -88,6 +88,7 @@ int string common_signin_button_text 0x7f06000d
 int string common_signin_button_text_long 0x7f06000e
 int string confirm 0x7f06001a
 int string created_tag 0x7f06001f
+int string default_label 0x7f060021
 int string delete 0x7f060019
 int string label 0x7f060018
 int string location_client_ulr_inactive_age_under_13 0x7f060012

@@ -13,7 +13,8 @@ import android.os.Build;
 import android.util.Log;
 
 /**
- * Created by jonmellman on 5/26/13.
+ * Database handler for creating, reading, updating, and deleting GpsTag objects.
+ * Holds the database's name, table, and column names.
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String LOGTAG = "DatabaseHandler";
@@ -59,7 +60,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Log.i(LOGTAG, "Initialized database: " + sqLiteDatabase.toString());
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN) //needed for db.close()
     public int addGpsTag(GpsTag gpsTag) {
         Log.i(LOGTAG, "Inserting record: " + gpsTag.toString());
 
@@ -99,7 +99,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Log.i(LOGTAG, "Fetched record " + gpsTag.toString());
         cursor.close();
-//        db.close(); //not sure why this has to remain open..
+//        db.close(); //closing the database here causes an illegalStateException
 
         return gpsTag;
     }
@@ -108,7 +108,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Log.i(LOGTAG, "Updating tag: " + this.getGpsTag(id).toString());
         SQLiteDatabase db = this.getWritableDatabase();
         
-        boolean isOpen = db.isOpen();
         GpsTag oldTag = this.getGpsTag(id);
         
         ContentValues values = new ContentValues();

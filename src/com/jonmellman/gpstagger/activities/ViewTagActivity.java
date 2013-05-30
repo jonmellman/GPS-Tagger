@@ -82,7 +82,7 @@ public class ViewTagActivity extends Activity {
     public void onConfirm(View view) {
     	DatabaseHandler dbHandler = DatabaseHandler.getInstance(this);
     	dbHandler.updateGpsTagLabel(tagID, labelText.getText().toString());
-    	Toast toast =  Toast.makeText(this, "@string/update_tag", Toast.LENGTH_SHORT);
+    	Toast toast =  Toast.makeText(this, R.string.updated_tag, Toast.LENGTH_SHORT);
     	toast.show();
     }
 }

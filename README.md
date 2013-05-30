@@ -1,5 +1,10 @@
 # GPS Tagger
 
+## Deployment Instructions
+
+GPS Tagger cannot be run on an android emulator as the Google Maps API requires a physical android device to run.
+
+
 ## Description
 
 GPS Tagger is an android application that allows users to easily "tag" their location, which saves their current GPS coordinates to the device. This information can then be viewed, labeled, and bookmarked.

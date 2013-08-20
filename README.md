@@ -11,10 +11,12 @@ For example:
 * Users can tag bus stops, friend's houses, restaurants, and any location they'll want to find later.
 * Alternatively, users can tag where they park their car (or bike) and not worry about forgetting where they left it
 
-GPS-Tagger can also interface with (https://play.google.com/store/apps/details?id=com.jwsoft.nfcactionlauncher&hl=en, "NFC Task Launcher") to allow GPS tag storing/clearing upon NFC tag recognition. See Deployment Instructions for how to configure NFC Task Launcher.
-I have a tag in my car which I set to toggle between creating and clearing a GPS tag. When I exit my car, I tap the NFC tag to store my car's parking location. When I enter my car, I tag the NFC tag again to clear that stored location data.
+GPS-Tagger can also interface with [NFC Task Launcher](https://play.google.com/store/apps/details?id=com.jwsoft.nfcactionlauncher&hl=en) to allow GPS tag storing/clearing upon NFC tag recognition. See Deployment Instructions for how to configure NFC Task Launcher.
 
+(I have an NFC tag in my car that I tap when I exit and enter my car so store and clear my location data, respectively, so I don't forget where I parked my car)
 ## Deployment Instructions
+
+GPS Tagger is not yet in the Android store. To deploy GPS Tagger to your android device, run `git clone git://github.com/jonmellman/GPS-Tagger.git`. Now you can import the project into Google's ADT and push it to your device.
 
 GPS Tagger cannot be run on an android emulator as the Google Maps API requires a physical android device to run.
 
@@ -45,7 +47,7 @@ To configure NFC Task Launcher to clear a GPS Tag, follow the same steps but rep
 * GPS Tagger will be developed using Google's early access preview of the Android Studio IDE (v0.1)
 * GPS Tagger will be tested on a physical android device - a Galaxy S3 running Jellybean 4.1
 
-## Screen Mockups
+## Screenshots
 
 1: Home Screen
 ![Home](/docs/Home.png)

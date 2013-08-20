@@ -3,6 +3,7 @@ package com.jonmellman.gpstagger.activities;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +33,7 @@ public class ViewTagActivity extends Activity {
     private EditText labelText;
     private GoogleMap map;
     private int tagID;
+    private GpsTag gpsTag;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB) //necessary for MapFragment
     public void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,7 @@ public class ViewTagActivity extends Activity {
         //load the GpsTag
         Log.i(LOGTAG, "Loading record with ID: " + tagID);
         DatabaseHandler dbHandler = DatabaseHandler.getInstance(this);
-        GpsTag gpsTag = dbHandler.getGpsTag(tagID);
+        gpsTag = dbHandler.getGpsTag(tagID);
         Log.i(LOGTAG, "Loaded GpsTag " + gpsTag.toString());
         
         //initialize the label with the correct text
@@ -84,5 +86,23 @@ public class ViewTagActivity extends Activity {
     	dbHandler.updateGpsTagLabel(tagID, labelText.getText().toString());
     	Toast toast =  Toast.makeText(this, R.string.updated_tag, Toast.LENGTH_SHORT);
     	toast.show();
+    }
+    
+    /*
+     * Launch map in Google Maps (or another application that registers the intent)
+     */
+    public void openInGM(View view) {
+
+      String label = gpsTag.get_label();
+      double latitude = gpsTag.get_latitude();
+      double longitude = gpsTag.get_longitude();
+      
+      String uriBegin = "geo:" + latitude + "," + longitude;
+      String query = latitude + "," + longitude + "(" + label + ")";
+      String encodedQuery = Uri.encode(query);
+      String uriString = uriBegin + "?q=" + encodedQuery + "&z=16";
+      Uri uri = Uri.parse(uriString);
+      Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
+      startActivity(intent);
     }
 }

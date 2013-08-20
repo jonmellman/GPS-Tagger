@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -135,7 +136,7 @@ public class MakeTagFragment extends Fragment {
         }
     }
     
-    private class MyLocationListener implements LocationListener {
+    public class MyLocationListener implements LocationListener {
 
         @Override
         public void onLocationChanged(Location location) {

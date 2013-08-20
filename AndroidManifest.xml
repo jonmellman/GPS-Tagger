@@ -33,6 +33,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -42,10 +43,26 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jonmellman.gpstagger.MainActivity" />
         </activity>
+        <activity
+            android:name="com.jonmellman.gpstagger.activities.ToggleCreate"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"> >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.jonmellman.gpstagger.activities.ToggleClear"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCvWM1VlyvclFquZ3msi0X94bNxFyMLhQY"/>
+        
+        <service android:name=".CarService" />
     </application>
 
 </manifest>
